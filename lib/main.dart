@@ -23,21 +23,26 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.dark,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<FileSystemEntity> _files = [];
+
+  _MyHomePageState() {
+    final directory = Directory('./dev/images_local');
+    _files = directory.listSync();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Here are some images:',
-            ),
-            Image.file(File('./dev/images_local/20240816220808_1.jpg'))
+            for (final file in _files) ...[
+              Image.file(
+                File(file.path),
+                height: 200,
+              ),
+            ],
           ],
         ),
       ),
