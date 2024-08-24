@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:galerie/pages/directory_selector_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,36 +27,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  List<FileSystemEntity> _files = [];
-
-  _MyHomePageState() {
-    final directory = Directory('./dev/images_local');
-    _files = directory.listSync();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: GridView(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          children: [
-            for (final file in _files) ...[
-              Image.file(
-                File(file.path),
-              ),
-            ],
-          ],
-        ),
-      ),
+    return const Scaffold(
+      body: DirectorySelectorPage(),
     );
   }
 }
