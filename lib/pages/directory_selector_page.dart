@@ -20,8 +20,6 @@ class _DirectorySelectorPageState extends State<DirectorySelectorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GalleryPage(files: _files),
-    );
+    return GalleryPage(files: _files);
   }
 }
