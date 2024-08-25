@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:galerie/components/galerie_app_bar.dart';
 import 'package:galerie/pages/gallery_page.dart';
 
 class DirectorySelectorPage extends StatelessWidget {
@@ -7,19 +8,22 @@ class DirectorySelectorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MaterialButton(
-              onPressed: () => chooseFile(context),
-              child: const Text('Choose a directory'),
-            ),
-          ],
-        ),
-      ],
+    return Scaffold(
+      appBar: const GalerieAppBar(),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MaterialButton(
+                onPressed: () => chooseFile(context),
+                child: const Text('Choose a directory'),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

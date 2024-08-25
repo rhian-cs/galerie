@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galerie/components/centered_scaffold.dart';
+import 'package:galerie/components/galerie_app_bar.dart';
 import 'package:galerie/components/gallery_grid.dart';
 import 'package:galerie/services/directory_reader.dart';
 
@@ -33,19 +34,24 @@ class _GalleryPageState extends State<GalleryPage> {
 
   @override
   Widget build(BuildContext context) {
+    const appBar = GalerieAppBar();
+
     if (!_loaded) {
       return const CenteredScaffold(
+        appBar: appBar,
         children: [Text('Loading...')],
       );
     }
 
     if (_filePaths.isEmpty) {
       return const CenteredScaffold(
+        appBar: appBar,
         children: [Text('No image files were found.')],
       );
     }
 
     return Scaffold(
+      appBar: appBar,
       body: GalleryGrid(filePaths: _filePaths),
     );
   }
