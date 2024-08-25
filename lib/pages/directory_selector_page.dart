@@ -1,23 +1,9 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:galerie/pages/gallery_page.dart';
 
-class DirectorySelectorPage extends StatefulWidget {
+class DirectorySelectorPage extends StatelessWidget {
   const DirectorySelectorPage({super.key});
-
-  @override
-  State<DirectorySelectorPage> createState() => _DirectorySelectorPageState();
-}
-
-class _DirectorySelectorPageState extends State<DirectorySelectorPage> {
-  List<FileSystemEntity> _files = [];
-
-  _DirectorySelectorPageState() {
-    final directory = Directory('./dev/images_local');
-    _files = directory.listSync();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +14,7 @@ class _DirectorySelectorPageState extends State<DirectorySelectorPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
-              onPressed: chooseFile,
+              onPressed: () => chooseFile(context),
               child: const Text('Choose a directory'),
             ),
           ],
@@ -37,16 +23,16 @@ class _DirectorySelectorPageState extends State<DirectorySelectorPage> {
     );
   }
 
-  void chooseFile() async {
-    final directoryPath = await FilePicker.platform.getDirectoryPath();
+  void chooseFile(BuildContext context) {
+    FilePicker.platform.getDirectoryPath().then((directoryPath) {
+      if (directoryPath == null) return;
 
-    if (directoryPath != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (_) => GalleryPage(directoryPath: directoryPath),
         ),
       );
-    }
+    });
   }
 }
