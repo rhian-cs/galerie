@@ -5,7 +5,7 @@ import 'package:galerie/services/directory_reader.dart';
 class GalleryPage extends StatefulWidget {
   final String directoryPath;
 
-  GalleryPage({
+  const GalleryPage({
     super.key,
     required this.directoryPath,
   });
