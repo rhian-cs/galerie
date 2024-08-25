@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:galerie/components/centered_scaffold.dart';
 import 'package:galerie/components/galerie_app_bar.dart';
+import 'package:galerie/components/gallery_column_slider.dart';
 import 'package:galerie/components/gallery_grid.dart';
 import 'package:galerie/services/directory_reader.dart';
 
@@ -19,6 +21,7 @@ class GalleryPage extends StatefulWidget {
 class _GalleryPageState extends State<GalleryPage> {
   List<String> _filePaths = [];
   bool _loaded = false;
+  int columnCount = 3;
 
   @override
   void initState() {
@@ -52,7 +55,28 @@ class _GalleryPageState extends State<GalleryPage> {
 
     return Scaffold(
       appBar: appBar,
-      body: GalleryGrid(filePaths: _filePaths),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              const Spacer(flex: 8),
+              Expanded(
+                flex: 2,
+                child: GalleryColumnSlider(
+                  columnCount: columnCount,
+                  onChange: (value) {
+                    setState(() {
+                      columnCount = value;
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+          Expanded(child: GalleryGrid(filePaths: _filePaths, columnCount: columnCount)),
+          // Text('aaa')
+        ],
+      ),
     );
   }
 }
