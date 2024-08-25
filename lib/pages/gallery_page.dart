@@ -22,7 +22,7 @@ class _GalleryPageState extends State<GalleryPage> {
   void initState() {
     super.initState();
 
-    DirectoryReader(widget.directoryPath).getFilePaths().then((value) {
+    DirectoryReader(widget.directoryPath).getImageFilePaths().then((value) {
       setState(() {
         _filePaths = value;
         _loaded = true;
@@ -40,6 +40,19 @@ class _GalleryPageState extends State<GalleryPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Text('Loading...')],
+            ),
+          ],
+        ),
+      );
+    }
+    if (_filePaths.isEmpty) {
+      return const Scaffold(
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('No image files were found.')],
             ),
           ],
         ),
