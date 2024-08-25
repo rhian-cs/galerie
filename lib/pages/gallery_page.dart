@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:galerie/services/directory_parser.dart';
 
 class GalleryPage extends StatelessWidget {
-  const GalleryPage({
-    super.key,
-    required List<FileSystemEntity> files,
-  }) : _files = files;
-
   final List<FileSystemEntity> _files;
+
+  GalleryPage({
+    super.key,
+    required String directoryPath,
+  }) : _files = DirectoryParser().readDirectoryFiles(directoryPath);
 
   @override
   Widget build(BuildContext context) {

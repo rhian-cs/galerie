@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:galerie/pages/gallery_page.dart';
 
@@ -20,6 +21,32 @@ class _DirectorySelectorPageState extends State<DirectorySelectorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GalleryPage(files: _files);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+              onPressed: chooseFile,
+              child: const Text('Choose a directory'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void chooseFile() async {
+    final directoryPath = await FilePicker.platform.getDirectoryPath();
+
+    if (directoryPath != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => GalleryPage(directoryPath: directoryPath),
+        ),
+      );
+    }
   }
 }
