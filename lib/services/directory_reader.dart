@@ -4,10 +4,14 @@ class DirectoryReader {
   final String directoryPath;
   DirectoryReader(this.directoryPath);
 
-  Future<List<String>> getImageFilePaths() {
+  Future<List<String>> getImageFilePaths() async {
     final directory = Directory(directoryPath);
 
-    return directory.list().where((f) => _imageFile(f)).map((entry) => entry.path).toList();
+    var paths = await directory.list().where((f) => _imageFile(f)).map((entry) => entry.path).toList();
+
+    paths.sort();
+
+    return paths;
   }
 
   _imageFile(FileSystemEntity file) {
