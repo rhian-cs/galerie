@@ -15,7 +15,7 @@ class GalleryPage extends StatefulWidget {
 }
 
 class _GalleryPageState extends State<GalleryPage> {
-  List<String> _file_paths = [];
+  List<String> _filePaths = [];
   bool _loaded = false;
 
   @override
@@ -24,7 +24,7 @@ class _GalleryPageState extends State<GalleryPage> {
 
     DirectoryReader(widget.directoryPath).getFilePaths().then((value) {
       setState(() {
-        _file_paths = value;
+        _filePaths = value;
         _loaded = true;
       });
     });
@@ -50,7 +50,7 @@ class _GalleryPageState extends State<GalleryPage> {
       body: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         children: [
-          for (final path in _file_paths) ...[
+          for (final path in _filePaths) ...[
             Image.file(File(path)),
           ],
         ],
