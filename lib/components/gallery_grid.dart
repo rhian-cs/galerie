@@ -12,7 +12,7 @@ class GalleryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 8),
       children: [
         for (final path in _filePaths) ...[
           Image.file(File(path)),
